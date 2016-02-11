@@ -3,6 +3,13 @@ var output = document.getElementById("output");
 var select_all = document.getElementById("select-all");
 var speak_text = document.getElementById("speak-text");
 var voice_select = document.getElementById("voice-select");
+
+if ('speechSynthesis' in window)
+  get_voices_R();
+else {
+  speak_text.style.display = "none";
+  voice_select.style.display = "none";
+}
 var voices = [];
 
 
@@ -19,8 +26,6 @@ function get_voices_R() {
     }
   }
 }
-
-get_voices_R();
 
 function get_voices() {
   return speechSynthesis.getVoices();
