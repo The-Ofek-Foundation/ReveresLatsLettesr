@@ -1,6 +1,30 @@
 var input = document.getElementById("input");
 var output = document.getElementById("output");
 var select_all = document.getElementById("select-all");
+var speak_text = document.getElementById("speak-text");
+var voice_select = document.getElementById("voice-select");
+var voices = [];
+
+
+function get_voices_R() {
+  voices = get_voices();
+  if (voices.length === 0)
+    setTimeout(get_voices_R, 1000);
+  else {
+    for (var i = 0; i < voices.length; i++) {
+      var option = document.createElement("OPTION");
+      option.value = voices[i].name;
+      option.innerHTML = voices[i].name;
+      voice_select.appendChild(option);
+    }
+  }
+}
+
+get_voices_R();
+
+function get_voices() {
+  return speechSynthesis.getVoices();
+}
 
 input.addEventListener("input", update_output);
 
@@ -14,6 +38,10 @@ document.onmousemove = function () {
 select_all.addEventListener("click", function (event) {
   output.focus();
   output.select();
+});
+
+speak_text.addEventListener("click", function (event) {
+  speak(output.value);
 });
 
 function update_output() {
@@ -46,4 +74,29 @@ function gte_punctuatiosn_adn_clena_strign (itme){
 
 function siLettre(chra) {
   return chra.match(/[a-z]/i);
+}
+ 
+// say a message
+function speak(text, callback) {
+    var voice = voices.filter(function (voice) {
+        return voice.name == voice_select.options[voice_select.selectedIndex].value;
+    })[0];
+  
+    var u = new SpeechSynthesisUtterance();
+    u.voice = voice;
+    u.text = text;
+ 
+    u.onend = function () {
+        if (callback) {
+            callback();
+        }
+    };
+ 
+    u.onerror = function (e) {
+        if (callback) {
+            callback(e);
+        }
+    };
+ 
+    speechSynthesis.speak(u);
 }
