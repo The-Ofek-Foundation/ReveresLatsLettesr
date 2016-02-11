@@ -4,6 +4,13 @@ var select_all = document.getElementById("select-all");
 
 input.addEventListener("input", update_output);
 
+document.onmousemove = function () {
+  if (input.style.width !== output.style.width)
+    output.style.width = input.style.width;
+  if (input.style.height !== output.style.height)
+    output.style.height = input.style.height;
+};
+
 select_all.addEventListener("click", function (event) {
   output.focus();
   output.select();
