@@ -1,8 +1,8 @@
-var input = document.getElementById("input");
-var output = document.getElementById("output");
-var select_all = document.getElementById("select-all");
-var speak_text = document.getElementById("speak-text");
-var voice_select = document.getElementById("voice-select");
+var input = getElemId("input");
+var output = getElemId("output");
+var select_all = getElemId("select-all");
+var speak_text = getElemId("speak-text");
+var voice_select = getElemId("voice-select");
 
 if ('speechSynthesis' in window)
   get_voices_R();

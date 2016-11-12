@@ -1,8 +1,8 @@
-var input = document.getElementById("input");
-var output = document.getElementById("output");
-var selectAll = document.getElementById("select-all");
-var speakText = document.getElementById("speak-text");
-var voiceSelect = document.getElementById("voice-select");
+var input = getElemId("input");
+var output = getElemId("output");
+var selectAll = getElemId("select-all");
+var speakText = getElemId("speak-text");
+var voiceSelect = getElemId("voice-select");
 var outputHeight = output.scrollHeight;
 var maxFontSize = getComputed(input, "font-size");
 var outputWidth = getComputed(input, "width") + "px";
